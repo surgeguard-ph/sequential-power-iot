@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sequential Power-On Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#141c1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="module" src="app.js"></script>
+</head><body>
+<section id="login" class="login hidden">
+  <form id="loginForm"><h1>Sequential Power-On Panel</h1>
+    <input id="email" type="email" placeholder="Email" required autocomplete="username">
+    <input id="pass" type="password" placeholder="Password" required autocomplete="current-password">
+    <button class="btn primary">Sign in</button><p id="loginErr" class="err"></p></form>
+</section>
+
+<main id="app" class="hidden">
+<header>
+  <div><h1>Sequential Power-On Panel</h1><span id="conn" class="pill off">Device offline</span></div>
+  <button id="logout" class="btn">Sign out</button>
+</header>
+
+<section class="state" id="stateBar"><b id="cond">—</b><span id="condNote">Waiting for device data</span>
+  <button id="estop" class="btn danger">Turn all outlets off</button></section>
+
+<section class="grid meters">
+  <div><label>AVR output voltage</label><strong id="mV">–</strong><small>V</small></div>
+  <div><label>Current</label><strong id="mI">–</strong><small>A</small></div>
+  <div><label>Power</label><strong id="mP">–</strong><small>W</small></div>
+  <div><label>Energy</label><strong id="mE">–</strong><small>kWh</small></div>
+  <div><label>Frequency</label><strong id="mF">–</strong><small>Hz</small></div>
+  <div><label>Power factor</label><strong id="mPF">–</strong><small></small></div>
+</section>
+
+<section>
+  <h2>Outlets</h2>
+  <div class="grid outlets" id="outlets"></div>
+  <div class="row"><span>Mode</span>
+    <div class="seg"><button id="modeAuto">Sequential</button><button id="modeManual">Immediate</button></div></div>
+</section>
+
+<section class="two">
+  <div><h2>Voltage and current</h2><canvas id="chart" height="150"></canvas></div>
+  <div><h2>Settings</h2>
+    <form id="settings" class="settings">
+      <label>Outlet 1 delay (s)<input id="d1" type="number" min="0" max="600"></label>
+      <label>Outlet 2 delay (s)<input id="d2" type="number" min="0" max="600"></label>
+      <label>Outlet 3 delay (s)<input id="d3" type="number" min="0" max="600"></label>
+      <label>Overvoltage limit (V)<input id="ovp" type="number" step="1"></label>
+      <label>Undervoltage limit (V)<input id="uvp" type="number" step="1"></label>
+      <label>Overload limit (A)<input id="ocp" type="number" step="0.5"></label>
+      <button class="btn primary">Save settings</button><span id="saved" class="ok"></span>
+    </form></div>
+</section>
+
+<section><h2>Event log</h2><button id="csv" class="btn">Download readings (CSV)</button>
+  <ul id="log" class="log"><li class="muted">No events yet.</li></ul></section>
+</main>
+<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js")</script>
+</body></html>
