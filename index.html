@@ -3,6 +3,10 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sequential Power-On Panel</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#141c1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script type="module" src="app.js"></script>
@@ -56,4 +60,5 @@
 <section><h2>Event log</h2><button id="csv" class="btn">Download readings (CSV)</button>
   <ul id="log" class="log"><li class="muted">No events yet.</li></ul></section>
 </main>
+<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js")</script>
 </body></html>
