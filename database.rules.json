@@ -1,0 +1,1 @@
+{ "rules": { "device": { ".read": "auth != null", ".write": "auth != null" } } }
